@@ -14,6 +14,9 @@ def find_feature(name, df, search_col, feat_col):
     # The length of the dataset
     length = len(df)
 
+    search_col = int(search_col)
+    feat_col = int(feat_col)
+
     # can totes omit this if not needed
     name = format_name(name)
 
