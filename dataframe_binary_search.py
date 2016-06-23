@@ -25,8 +25,8 @@ def find_feature(name, df, search_col, feat_col):
 
     # starting lower bound
     lower_bound = 0
-   
-    while name != guess and upper_bound > lower_bound:
+
+    while upper_bound > lower_bound:
         
         # slice again, new index based on new bounds
         index = math.floor((upper_bound + lower_bound) / 2)
@@ -34,8 +34,11 @@ def find_feature(name, df, search_col, feat_col):
         # get next guess. formatting can be omitted
         guess = format_name(df[index][search_col])
 
+        if name == guess:
+            return df[index][feature_col]
+
         # If name comes before the guess
-        if name < guess:
+        elif name < guess:
 
             # upper search bound gets lowered before slicing again
             upper_bound = index - 1
@@ -45,10 +48,6 @@ def find_feature(name, df, search_col, feat_col):
             # raise the lower bound
             lower_bound = index + 1
 
-        if name == guess:
-            return df[index][feature_col]
-        
-        else:
-        # didn't find the feature, return -1
-            return -1
-
+    # didn't find the feature, return -1
+    return -1
+    
